@@ -20,10 +20,8 @@ service: aws-python # NOTE: update this with your service name
 provider:
   name: aws
   runtime: python2.7
-
-# you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
+  stage: dev
+  region: ap-southeast-2
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
@@ -46,11 +44,12 @@ provider:
 #    variable1: value1
 
 # you can add packaging information here
-#package:
+package:
 #  include:
 #    - include-me.py
 #    - include-me-dir/**
-#  exclude:
+  exclude:
+    - .git/**
 #    - exclude-me.py
 #    - exclude-me-dir/**
 

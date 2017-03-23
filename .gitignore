@@ -16,6 +16,7 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+garys_auth.py
 
 # Serverless directories
 .serverless

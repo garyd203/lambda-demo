@@ -25,13 +25,28 @@ def harvest(event, context):
 
 
 def user_tally(event, context):
+    t = Twitter(auth=get_garys_twitter_auth())
+    response = t.search.tweets(q='#sypy', result_type='recent', since_id=0)
+
+    for tweet in response['statuses']:
+        print "@" + tweet['user']['screen_name'] + ": " + tweet['text']
+
+    tallies = {}
+    messages = []
+    for tweet in response['statuses']:
+        username = tweet['user']['screen_name']
+        tallies[username] = tallies.get(username, 0) + 1
+
+        messages.append(tweet['text'])
+
     return {
         "statusCode": 200,
         "body": json.dumps({
-            "message": "Go SyPy"
+            "messages": messages,
+            "tweets": tallies,
         }),
-        }
+    }
 
 
 if __name__ == '__main__':
-    user_tally({}, {})
+    print user_tally({}, {})
